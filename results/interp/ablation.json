@@ -1,0 +1,14 @@
+{
+  "n": 13,
+  "n_examples": 2000,
+  "paper_finding": "causal ablation of attention to up-steps (N) costs exact-match accuracy (paper: ~1.5% drop)",
+  "baseline_exact_match": 0.996,
+  "ablate_N_exact_match": 0.0,
+  "ablate_N_drop": 0.996,
+  "ablate_N_drop_pct": 99.6,
+  "ablate_E_exact_match": 0.0005,
+  "ablate_E_drop": 0.9955,
+  "ablate_E_drop_pct": 99.55000000000001,
+  "note": "ablate_N masks decoder cross-attention to all source N-step (up-step) positions (renormalizing softmax over the remaining E positions); ablate_E is the complementary control, masking E-step positions instead. Only the decoder cross-attention is affected -- encoder self-attention and decoder self-attention are untouched.",
+  "eval_time_sec": 5.093832015991211
+}

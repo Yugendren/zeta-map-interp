@@ -1,0 +1,24 @@
+{
+  "n_examples_probe_set": 2000,
+  "n_train_examples": 1600,
+  "n_test_examples": 400,
+  "paper_finding": "path levels are linearly decodable from encoder hidden states (~84% probe accuracy)",
+  "level_probe": {
+    "train_acc": 0.9472355842590332,
+    "test_acc": 0.9477884769439697,
+    "n_train": 41600,
+    "n_test": 10400,
+    "num_classes": 14,
+    "final_train_loss": 0.22129641473293304,
+    "majority_class_baseline_acc": 0.24394230769230768
+  },
+  "step_type_probe": {
+    "train_acc": 0.9999759793281555,
+    "test_acc": 1.0,
+    "n_train": 41600,
+    "n_test": 10400,
+    "num_classes": 2,
+    "final_train_loss": 0.005926596000790596,
+    "majority_class_baseline_acc": 0.5
+  }
+}
