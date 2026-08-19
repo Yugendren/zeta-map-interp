@@ -18,6 +18,7 @@ This module is pure Python / stdlib only.
 from __future__ import annotations
 
 import json
+import random
 from pathlib import Path
 from typing import Iterator
 
@@ -48,6 +49,56 @@ def all_dyck_paths(n: int) -> Iterator[tuple[str, ...]]:
             path.pop()
 
     yield from rec([], 0, 0)
+
+
+def random_dyck_path(n: int, rng: random.Random) -> tuple[str, ...]:
+    """Sample a Dyck path of order n uniformly at random via the cycle lemma.
+
+    Method (Dvoretzky-Motzkin cycle lemma, the standard "add one and rotate"
+    construction for uniform random ballot sequences / Dyck paths):
+
+    1. Form the multiset of n 'N' and (n + 1) 'E' steps (one extra 'E') and
+       draw a uniformly random linear arrangement of it (a random shuffle).
+       This arrangement has length 2n + 1 and, reading N as +1 and E as -1,
+       its steps sum to -1.
+    2. The cycle lemma guarantees that among the 2n + 1 cyclic rotations of
+       this arrangement, EXACTLY ONE has the property that every proper
+       prefix sum is >= 0 (equivalently: the running N-count never drops
+       below the running E-count until the very last step, which must be
+       the unique step that takes the cumulative sum to -1). Concretely,
+       that rotation is the one starting immediately after the position
+       achieving the (first) global minimum of the prefix-sum sequence.
+    3. Dropping the trailing 'E' of that rotation yields a sequence of n 'N'
+       and n 'E' steps whose every prefix has #N >= #E, i.e. a Dyck path.
+
+    Why this gives a UNIFORM Dyck path: extending a Dyck path of order n by
+    one trailing 'E' and taking all 2n + 1 of its cyclic rotations produces
+    2n + 1 *distinct* arrangements (no periodicity is possible since the
+    counts n and n + 1 are coprime), and by the cycle lemma exactly one of
+    those rotations is itself a valid preimage in step 2 above. So the map
+    "arrangement -> Dyck path" from step 2 is exactly (2n + 1)-to-1, and
+    since C(2n + 1, n) = (2n + 1) * Catalan(n), every Dyck path has exactly
+    the same number (2n + 1) of preimages among the uniformly-random
+    arrangements drawn in step 1 -- hence a uniform arrangement yields a
+    uniform Dyck path. (Verified empirically: see tests/test_dyck.py, which
+    checks validity for many n and near-uniform frequencies for n = 4 by
+    exhaustive comparison against all_dyck_paths.)
+    """
+    if n == 0:
+        return ()
+    steps = ['N'] * n + ['E'] * (n + 1)
+    rng.shuffle(steps)
+    prefix = 0
+    best = 0
+    best_idx = 0
+    for i, s in enumerate(steps):
+        prefix += 1 if s == 'N' else -1
+        if prefix < best:
+            best = prefix
+            best_idx = i + 1
+    rotated = steps[best_idx:] + steps[:best_idx]
+    assert rotated[-1] == 'E'
+    return tuple(rotated[:-1])
 
 
 def area_word(path: tuple[str, ...]) -> tuple[int, ...]:

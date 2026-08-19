@@ -1,3 +1,4 @@
+import random
 import sys
 import unittest
 from collections import Counter
@@ -12,6 +13,7 @@ from zetamap.dyck import (
     area_word,
     bounce,
     dinv,
+    random_dyck_path,
     zeta,
     zeta_inverse,
 )
@@ -104,6 +106,29 @@ class TestZetaInverse(unittest.TestCase):
             with self.subTest(n=n):
                 for d in all_dyck_paths(n):
                     self.assertEqual(zeta_inverse(zeta(d)), d)
+
+
+class TestRandomDyckPath(unittest.TestCase):
+    def test_validity_across_n(self):
+        rng = random.Random(0)
+        valid_cache = {n: set(all_dyck_paths(n)) for n in (0, 1, 2, 3, 5, 8, 12)}
+        for n, valid in valid_cache.items():
+            with self.subTest(n=n):
+                for _ in range(200):
+                    d = random_dyck_path(n, rng)
+                    self.assertIn(d, valid)
+                    self.assertEqual(len(d), 2 * n)
+                    self.assertEqual(d.count('N'), n)
+                    self.assertEqual(d.count('E'), n)
+
+    def test_n4_near_uniform(self):
+        rng = random.Random(42)
+        counts = Counter(random_dyck_path(4, rng) for _ in range(50_000))
+        all_paths = set(all_dyck_paths(4))
+        self.assertEqual(set(counts), all_paths)  # every path hit
+        freqs = counts.values()
+        ratio = max(freqs) / min(freqs)
+        self.assertLess(ratio, 2.0)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,55 @@
+{
+  "n=11": {
+    "exact_match": 0.0,
+    "n_examples": 58786,
+    "mode": "exhaustive"
+  },
+  "n=12": {
+    "exact_match": 0.0,
+    "n_examples": 208012,
+    "mode": "exhaustive"
+  },
+  "n=13": {
+    "exact_match": 0.9950195181047248,
+    "n_examples": 37145,
+    "mode": "held-out validation split (same distribution as training)"
+  },
+  "n=14": {
+    "exact_match": 0.0,
+    "n_examples": 10000,
+    "mode": "10000 random samples (cycle-lemma sampler)"
+  },
+  "n=15": {
+    "exact_match": 0.0,
+    "n_examples": 10000,
+    "mode": "10000 random samples (cycle-lemma sampler)"
+  },
+  "n=16": {
+    "exact_match": 0.0,
+    "n_examples": 10000,
+    "mode": "10000 random samples (cycle-lemma sampler)"
+  },
+  "hyperparameters": {
+    "train_n": 13,
+    "data_path": "/Users/yugendren/experiments/zeta_map_interp/data/dyck_n13.jsonl",
+    "val_frac": 0.05,
+    "batch_size": 512,
+    "lr": 0.001,
+    "warmup_steps": 1000,
+    "lr_schedule": "cosine",
+    "epochs": 80,
+    "encoder_layers": 1,
+    "decoder_layers": 1,
+    "seed": 0,
+    "device": "auto",
+    "max_len": 40,
+    "subset_size": 300000,
+    "early_stop_exact_match": 0.99,
+    "grad_clip": 1.0,
+    "eval_batch_size": 1024,
+    "gen_eval_samples": 10000,
+    "run_generalization": true,
+    "tag": "300K-example subset of n=13 (time-budget fallback per spec, after earlier full-705755-example runs at lr=3e-4 constant, lr=1e-3 constant, and lr=1e-3 cosine(30ep) all plateaued well below target -- diagnosed via a small-scale (200-example) overfit probe that a 30-epoch cosine schedule was annealing lr to ~0 right as the model was mid-phase-transition (loss still falling); dropout also changed from PyTorch's default 0.1 to 0.0, better suited to this exact-match/deterministic-function task. Using 300K subset + 80 epochs to get enough optimizer steps for the transition within the ~4h MPS time budget."
+  },
+  "param_count": 337029
+}

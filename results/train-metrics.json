@@ -1,0 +1,371 @@
+{
+  "hyperparameters": {
+    "train_n": 13,
+    "data_path": "/Users/yugendren/experiments/zeta_map_interp/data/dyck_n13.jsonl",
+    "val_frac": 0.05,
+    "batch_size": 512,
+    "lr": 0.001,
+    "warmup_steps": 1000,
+    "lr_schedule": "cosine",
+    "epochs": 80,
+    "encoder_layers": 1,
+    "decoder_layers": 1,
+    "seed": 0,
+    "device": "auto",
+    "max_len": 40,
+    "subset_size": 300000,
+    "early_stop_exact_match": 0.99,
+    "grad_clip": 1.0,
+    "eval_batch_size": 1024,
+    "gen_eval_samples": 10000,
+    "run_generalization": true,
+    "tag": "300K-example subset of n=13 (time-budget fallback per spec, after earlier full-705755-example runs at lr=3e-4 constant, lr=1e-3 constant, and lr=1e-3 cosine(30ep) all plateaued well below target -- diagnosed via a small-scale (200-example) overfit probe that a 30-epoch cosine schedule was annealing lr to ~0 right as the model was mid-phase-transition (loss still falling); dropout also changed from PyTorch's default 0.1 to 0.0, better suited to this exact-match/deterministic-function task. Using 300K subset + 80 epochs to get enough optimizer steps for the transition within the ~4h MPS time budget."
+  },
+  "device": "mps",
+  "param_count": 337029,
+  "train_size": 300000,
+  "val_size": 37145,
+  "seq_len_src": 26,
+  "seq_len_tgt": 28,
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 5.917686003466922,
+      "val_exact_match": 0.0,
+      "lr": 0.000587,
+      "epoch_time_sec": 45.554149866104126
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.6251985650420596,
+      "val_exact_match": 0.0,
+      "lr": 0.0009999653227372352,
+      "epoch_time_sec": 44.13089942932129
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.5314153048874168,
+      "val_exact_match": 0.0,
+      "lr": 0.0009993266608801453,
+      "epoch_time_sec": 54.24169397354126
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.4754150933474811,
+      "val_exact_match": 0.0,
+      "lr": 0.0009978841497143786,
+      "epoch_time_sec": 54.3216028213501
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.4384588913502547,
+      "val_exact_match": 0.00037690133261542605,
+      "lr": 0.0009956401114904658,
+      "epoch_time_sec": 43.34288501739502
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.3873406777813166,
+      "val_exact_match": 0.0002961367613406919,
+      "lr": 0.0009925981588105694,
+      "epoch_time_sec": 44.7296667098999
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.3515439717537714,
+      "val_exact_match": 0.0035805626598465474,
+      "lr": 0.0009887631888126761,
+      "epoch_time_sec": 43.186362981796265
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.306837698145938,
+      "val_exact_match": 0.010284022075649482,
+      "lr": 0.000984141375286858,
+      "epoch_time_sec": 43.05418515205383
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.26548408691488434,
+      "val_exact_match": 0.01997577062861758,
+      "lr": 0.0009787401587362942,
+      "epoch_time_sec": 43.102051973342896
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.22293691108251187,
+      "val_exact_match": 0.0736303674787993,
+      "lr": 0.0009725682343990523,
+      "epoch_time_sec": 42.42626881599426
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.19014541013960953,
+      "val_exact_match": 0.1296809799434648,
+      "lr": 0.0009656355382499171,
+      "epoch_time_sec": 45.477991342544556
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.14408285718779923,
+      "val_exact_match": 0.1726746533853816,
+      "lr": 0.0009579532310047954,
+      "epoch_time_sec": 44.76845693588257
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.11676702708158476,
+      "val_exact_match": 0.3144972405438148,
+      "lr": 0.0009495336801534527,
+      "epoch_time_sec": 43.345815658569336
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.09314747710963361,
+      "val_exact_match": 0.4605195854085341,
+      "lr": 0.0009403904400495041,
+      "epoch_time_sec": 44.21501898765564
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.102320246907021,
+      "val_exact_match": 0.35035671018979675,
+      "lr": 0.0009305382300897146,
+      "epoch_time_sec": 44.23684096336365
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.06231890857194267,
+      "val_exact_match": 0.4806568851797012,
+      "lr": 0.0009199929110177327,
+      "epoch_time_sec": 48.149446964263916
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.051082437654556674,
+      "val_exact_match": 0.6416475972540046,
+      "lr": 0.0009087714593904095,
+      "epoch_time_sec": 47.415881872177124
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.04351120109673043,
+      "val_exact_match": 0.6766186566159644,
+      "lr": 0.0008968919402478075,
+      "epoch_time_sec": 44.98715090751648
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.04418246041500223,
+      "val_exact_match": 0.8282137568986405,
+      "lr": 0.0008843734780308954,
+      "epoch_time_sec": 46.55420112609863
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.030158317568409972,
+      "val_exact_match": 0.8024498586620002,
+      "lr": 0.0008712362257937503,
+      "epoch_time_sec": 44.3006489276886
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.028182050370557214,
+      "val_exact_match": 0.7329384843182124,
+      "lr": 0.0008575013327598286,
+      "epoch_time_sec": 43.129409074783325
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.023122226673181555,
+      "val_exact_match": 0.8444743572486203,
+      "lr": 0.0008431909102745381,
+      "epoch_time_sec": 42.559426069259644
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.022086407994031398,
+      "val_exact_match": 0.7803472876564813,
+      "lr": 0.0008283279962089221,
+      "epoch_time_sec": 42.61087417602539
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.016591315760051534,
+      "val_exact_match": 0.8639655404495894,
+      "lr": 0.0008129365178717594,
+      "epoch_time_sec": 41.78016018867493
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.015415674980583605,
+      "val_exact_match": 0.8906178489702518,
+      "lr": 0.0007970412534897906,
+      "epoch_time_sec": 91.15378499031067
+    },
+    {
+      "epoch": 26,
+      "train_loss": 0.014402727143514787,
+      "val_exact_match": 0.7679633867276888,
+      "lr": 0.0007806677923180782,
+      "epoch_time_sec": 44.927149057388306
+    },
+    {
+      "epoch": 27,
+      "train_loss": 0.011391261758190602,
+      "val_exact_match": 0.9006057342845605,
+      "lr": 0.0007638424934447195,
+      "epoch_time_sec": 45.16067028045654
+    },
+    {
+      "epoch": 28,
+      "train_loss": 0.00969503074328164,
+      "val_exact_match": 0.9009287925696594,
+      "lr": 0.0007465924433562316,
+      "epoch_time_sec": 46.439122915267944
+    },
+    {
+      "epoch": 29,
+      "train_loss": 0.008574721520232614,
+      "val_exact_match": 0.9469645981962579,
+      "lr": 0.0007289454123319222,
+      "epoch_time_sec": 44.21439981460571
+    },
+    {
+      "epoch": 30,
+      "train_loss": 0.008299808333780452,
+      "val_exact_match": 0.9422264100148069,
+      "lr": 0.0007109298097374438,
+      "epoch_time_sec": 44.18249297142029
+    },
+    {
+      "epoch": 31,
+      "train_loss": 0.0065284570060835665,
+      "val_exact_match": 0.9508412976174452,
+      "lr": 0.0006925746382895059,
+      "epoch_time_sec": 45.05489993095398
+    },
+    {
+      "epoch": 32,
+      "train_loss": 0.00813723946170589,
+      "val_exact_match": 0.9472338134338404,
+      "lr": 0.00067390944736537,
+      "epoch_time_sec": 44.28234601020813
+    },
+    {
+      "epoch": 33,
+      "train_loss": 0.0054653345797141,
+      "val_exact_match": 0.9462646385785436,
+      "lr": 0.0006549642854322946,
+      "epoch_time_sec": 45.3485267162323
+    },
+    {
+      "epoch": 34,
+      "train_loss": 0.005071468269667007,
+      "val_exact_match": 0.9556333288464127,
+      "lr": 0.0006357696516735112,
+      "epoch_time_sec": 42.3843719959259
+    },
+    {
+      "epoch": 35,
+      "train_loss": 0.004012499572971435,
+      "val_exact_match": 0.9703055592946561,
+      "lr": 0.0006163564468886089,
+      "epoch_time_sec": 42.681772232055664
+    },
+    {
+      "epoch": 36,
+      "train_loss": 0.004535205135004335,
+      "val_exact_match": 0.9649481760667654,
+      "lr": 0.0005967559237473693,
+      "epoch_time_sec": 44.65607786178589
+    },
+    {
+      "epoch": 37,
+      "train_loss": 0.0039944363771476895,
+      "val_exact_match": 0.9363575178355095,
+      "lr": 0.0005769996364771371,
+      "epoch_time_sec": 44.98706293106079
+    },
+    {
+      "epoch": 38,
+      "train_loss": 0.003028022124171384,
+      "val_exact_match": 0.9863777089783282,
+      "lr": 0.0005571193900647244,
+      "epoch_time_sec": 44.300199031829834
+    },
+    {
+      "epoch": 39,
+      "train_loss": 0.00380283616361631,
+      "val_exact_match": 0.9704132453896891,
+      "lr": 0.0005371471890546248,
+      "epoch_time_sec": 43.47592091560364
+    },
+    {
+      "epoch": 40,
+      "train_loss": 0.0028195925636627034,
+      "val_exact_match": 0.9512181989500605,
+      "lr": 0.0005171151860259665,
+      "epoch_time_sec": 44.718346118927
+    },
+    {
+      "epoch": 41,
+      "train_loss": 0.002787613435672221,
+      "val_exact_match": 0.9806165028940638,
+      "lr": 0.0004970556298311492,
+      "epoch_time_sec": 44.55857872962952
+    },
+    {
+      "epoch": 42,
+      "train_loss": 0.002271848365107437,
+      "val_exact_match": 0.9621752591196662,
+      "lr": 0.0004770008136794942,
+      "epoch_time_sec": 45.514594078063965
+    },
+    {
+      "epoch": 43,
+      "train_loss": 0.0021875407016085564,
+      "val_exact_match": 0.9741284156683269,
+      "lr": 0.0004569830231494859,
+      "epoch_time_sec": 45.705694913864136
+    },
+    {
+      "epoch": 44,
+      "train_loss": 0.0021695205482641163,
+      "val_exact_match": 0.9889890967828779,
+      "lr": 0.0004370344842132976,
+      "epoch_time_sec": 45.56330919265747
+    },
+    {
+      "epoch": 45,
+      "train_loss": 0.00226539180401189,
+      "val_exact_match": 0.9783550948983712,
+      "lr": 0.0004171873113572748,
+      "epoch_time_sec": 44.58189296722412
+    },
+    {
+      "epoch": 46,
+      "train_loss": 0.0013674997992089667,
+      "val_exact_match": 0.9714093417687442,
+      "lr": 0.0003974734558818978,
+      "epoch_time_sec": 45.04191589355469
+    },
+    {
+      "epoch": 47,
+      "train_loss": 0.0012283617766162202,
+      "val_exact_match": 0.9869699825010095,
+      "lr": 0.00037792465446444983,
+      "epoch_time_sec": 42.00569701194763
+    },
+    {
+      "epoch": 48,
+      "train_loss": 0.001952269112492821,
+      "val_exact_match": 0.9950195181047248,
+      "lr": 0.0003585723780672007,
+      "epoch_time_sec": 41.978902101516724
+    }
+  ],
+  "total_train_time_sec": 2195.3526709079742,
+  "final_val_exact_match": 0.9950195181047248,
+  "note": "300K-example subset of n=13 (time-budget fallback per spec, after earlier full-705755-example runs at lr=3e-4 constant, lr=1e-3 constant, and lr=1e-3 cosine(30ep) all plateaued well below target -- diagnosed via a small-scale (200-example) overfit probe that a 30-epoch cosine schedule was annealing lr to ~0 right as the model was mid-phase-transition (loss still falling); dropout also changed from PyTorch's default 0.1 to 0.0, better suited to this exact-match/deterministic-function task. Using 300K subset + 80 epochs to get enough optimizer steps for the transition within the ~4h MPS time budget."
+}
